@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme:"light2",
+	animationEnabled: true,
+	title:{
+		text: "Potencia generada: Nodo 611"
+	},
+	axisY :{
+		includeZero: false,
+		title: "Potencia [W]",
+		suffix: "W"
+	},
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries
+	},
+	data: [{
+	
+		type: "spline", 
+		showInLegend: true,
+		yValueFormatString: "##.00W",
+		name: "Red",
+		dataPoints: [
+            { label: "10:30", y: 2.22 },
+			{ label: "10:40", y: 2.20 },
+			{ label: "10:50", y: 2.44 },
+			{ label: "11:00", y: 2.45 },
+			{ label: "11:10", y: 2.58 },
+			{ label: "11:20", y: 2.44 },
+			{ label: "11:30", y: 2.40 },
+		]
+	},
+	{
+		type: "spline", 
+		showInLegend: true,
+		yValueFormatString: "##.00W",
+		name: "Panel",
+		dataPoints: [
+			{ label: "10:30", y: 4.37 },
+			{ label: "10:40", y: 4.27 },
+			{ label: "10:50", y: 4.72 },
+			{ label: "11:00", y: 4.87 },
+			{ label: "11:10", y: 5.35 },
+			{ label: "11:20", y: 5.50 },
+			{ label: "11:30", y: 4.84 },
+		]
+	},
+	{
+		type: "spline", 
+		showInLegend: true,
+		yValueFormatString: "##.00W",
+		name: "Bateria",
+		dataPoints: [
+			{ label: "10:30", y: 5.22 },
+			{ label: "10:40", y: 2.20 },
+			{ label: "10:50", y: 7.44 },
+			{ label: "11:00", y: 2.45 },
+			{ label: "11:10", y: 8.58 },
+			{ label: "11:20", y: 2.44 },
+			{ label: "11:30", y: 8.40 },
+		]
+	},
+	{
+		type: "spline", 
+		showInLegend: true,
+		yValueFormatString: "##.00W",
+		name: "Carga",
+		dataPoints: [
+			{ label: "10:30", y: 3.37 },
+			{ label: "10:40", y: 4.27 },
+			{ label: "10:50", y: 8.72 },
+			{ label: "11:00", y: 4.87 },
+			{ label: "11:10", y: 9.35 },
+			{ label: "11:20", y: 6.50 },
+			{ label: "11:30", y: 1.84 },
+		]
+	}]
+});
+chart.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
