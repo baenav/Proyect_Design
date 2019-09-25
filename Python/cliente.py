@@ -20,6 +20,7 @@ print("UDP target port:", UDP_PORT)
 
 sock = socket.socket(socket.AF_INET, # Internet
                      socket.SOCK_DGRAM) # UDP
+                     
 while True:
 #    MESSAGE = str(adquisicion())
     now = datetime.now()
