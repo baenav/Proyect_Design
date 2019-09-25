@@ -98,11 +98,7 @@ window1()
 		console.log(dataPoints1)
 		var chart = new CanvasJS.Chart("chartContainer", info);
 
-		//Add Data
 
-
-
-		//Hasta aquí
 		function toggleDataSeries(e) {
 			if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
 				e.dataSeries.visible = false;
@@ -121,7 +117,7 @@ window1()
 			jQuery.getJSON("/Generar","Case1" ,function addData(data) {
 			console.log(data)
 			// dataPoints1=[]
-			for (var i = data.length-1; i >= 0; i--) {
+			for (var i = 0; i < data.length; i++) {
 				console.log("Iteracion"+i)
 				console.log("data["+i+"]")
 				console.log({

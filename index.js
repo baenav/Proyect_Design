@@ -31,7 +31,7 @@ app.listen(app.get('port'), () => {
 });
 
 app.get('/',(req,res)=>{
-  res.render('index2',{
+  res.render('index',{
   })
 })
 
@@ -60,7 +60,15 @@ app.get('/Generar',function(req,res){
 
   //const quer1 = "SELECT P1, P2, P3, P4, CONCAT_WS(' ', fecha, hora) AS datetime FROM diseno_1 ORDER BY fecha DESC, hora DESC LIMIT 100"
 
-  const quer1 = "SELECT P1, P2, P3, P4, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos ORDER BY fecha DESC, hora DESC LIMIT 100"
+  //const quer1 = "SELECT P1, P2, P3, P4, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos ORDER BY fecha DESC, hora DESC LIMIT 100"
+
+  //const quer1 =  "SELECT P1, P2, P3, P4, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos "+
+  //"WHERE CONCAT_WS(' ', fecha, hora) BETWEEN '2019-09-24 00:00:00' AND '2019-09-25 23:00:00' ORDER BY fecha DESC, hora DESC "
+
+//  const quer1 =  "SELECT P1, P2, P3, P4, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos "+
+//"WHERE CONCAT_WS(' ', fecha, hora) >= NOW()- INTERVAL 1 HOUR"
+  const quer1 =  "SELECT P1, P2, P3, P4, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos "+
+  "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 7 HOUR)"
 
 
 
