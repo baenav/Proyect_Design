@@ -31,7 +31,7 @@ app.listen(app.get('port'), () => {
 });
 
 app.get('/',(req,res)=>{
-  res.render('index',{
+  res.render('index2',{
   })
 })
 
@@ -107,20 +107,45 @@ app.get('/GenerarDay',function(req,res){
     */
   });
   console.log('Generando Dia')
-
-  //const querReal = "SELECT P1, P2, P3, P4, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos ORDER BY fecha DESC, hora DESC LIMIT 100"
-
-  //const querReal =  "SELECT P1, P2, P3, P4, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos "+
-  //"WHERE CONCAT_WS(' ', fecha, hora) BETWEEN '2019-09-24 00:00:00' AND '2019-09-25 23:00:00' ORDER BY fecha DESC, hora DESC "
-
   const querDay = "SELECT P1, P2, P3, P4, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos "+
   "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 1 DAY)"
-
-
   con.connect(function(err) {
     if (err) throw err;
     });
+  con.query( querDay , function (err, result, fields) {
+    if (err) throw err;
+    //console.log(result);
+    //console.log(JSON.stringify(result))
+    res.send(JSON.stringify(result));
+    /*
+    fs.writeFile('./public/table.json', JSON.stringify(result), function (err) {
+      if (err) throw err;
+      console.log('table.json was saved!');
+      });
+      */
+    });
+  con.end();
+})
 
+app.get('/GenerarWeek',function(req,res){
+  var con = mysql.createConnection({
+    host: "db4free.net",
+    user: "baenav",
+    password: "qwertyuiop",
+    database: "proyecto_diseno"
+
+    /*host: "diseno1.cl8ozxx0esmz.us-east-1.rds.amazonaws.com",
+    user: "anamacn",
+    password: "qwertyuiop",
+    database: "diseno_1"
+    */
+  });
+  console.log('Generando Semana')
+  const querDay = "SELECT P1, P2, P3, P4, CONCAT_WS(' ', fecha, hora) AS datetime FROM datos "+
+  "WHERE CONCAT_WS(' ', fecha, hora) > date_sub(NOW(), INTERVAL 1 WEEK)"
+  con.connect(function(err) {
+    if (err) throw err;
+    });
   con.query( querDay , function (err, result, fields) {
     if (err) throw err;
     //console.log(result);

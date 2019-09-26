@@ -24,18 +24,17 @@ sock = socket.socket(socket.AF_INET, # Internet
 #    print("Could not bind 2nd IP")
 while True:
 #    MESSAGE = str(adquisicion())
+    now = datetime.now()
+    fecha = now.strftime('%Y-%m-%d')
+    hora = time.strftime("%H:%M:%S")
+    ADQ=adquisicion()
+    ADQ=str(ADQ)
+    ADQ=ADQ[1:len(ADQ)-1]
+    MESSAGE = ADQ+', ' + fecha +', '+ hora
+    MESSAGE = bytes(MESSAGE)
     try:
-        now = datetime.now()
-        fecha = now.strftime('%Y-%m-%d')
-        hora = time.strftime("%H:%M:%S")
-        ADQ=adquisicion()
-        ADQ=str(ADQ)
-        ADQ=ADQ[1:len(ADQ)-1]
-        MESSAGE = ADQ+', ' + fecha +', '+ hora
-        MESSAGE = bytes(MESSAGE)
-        print("message:", MESSAGE)
         sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
-        break
+        print("message:", MESSAGE)
     except socket.error:
         print "Error de Conexión, reintentando..."
         time.sleep(1)

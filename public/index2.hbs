@@ -10,9 +10,9 @@
     Seleccione <span class="caret"></span>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button" onclick= "window1()">Día</button>
-    <button class="dropdown-item" type="button" onclick= "window2()">Semana</button>
-    <button class="dropdown-item" type="button" onclick= "window3()">Mes</button>
+    <button class="dropdown-item" type="button" onclick= "window1()">"Tiempo Real"</button>
+    <button class="dropdown-item" type="button" onclick= "window2()">Día</button>
+    <button class="dropdown-item" type="button" onclick= "window3()">Semana</button>
   </div>
 </div>
 <!--- Dropdown menu -->
@@ -229,7 +229,7 @@ window1()
 </script>
 
 <script>
-
+// Dropdown Dia
  function window2 () {
 var dataPoints1 = [];
 var dataPoints2 = [];
@@ -297,10 +297,121 @@ var info = {
 				dataPoints: dataPoints4
 			}]
 		}
-setInterval(drawChart, 9000);
- function drawChart()
+//setInterval(drawChart, 9000);
+drawChartDay()
+ function drawChartDay()
    {
-jQuery.getJSON("sample.json", addData);
+     console.log("Getting Data of the day")
+     jQuery.getJSON("/GenerarDay","Case1" ,function addData(data) {
+     console.log(data)
+     // dataPoints1=[]
+     for (var i = 0; i < data.length; i++) {
+       console.log("Iteracion"+i)
+       console.log("data["+i+"]")
+       console.log({
+         label: data[i].datetime,
+         y: parseFloat(data[i].P1),
+
+       })
+       console.log("datapoints1")
+       console.log(dataPoints1)
+       dataPoints1.push({
+         label: data[i].datetime,
+         y: parseFloat(data[i].P1),
+
+
+       });
+       dataPoints2.push({
+         label: data[i].datetime,
+         y: parseFloat(data[i].P2),
+
+
+       });
+       dataPoints3.push({
+         label: data[i].datetime,
+         y: parseFloat(data[i].P3),
+
+
+       });
+       dataPoints4.push({
+         label: data[i].datetime,
+         y: parseFloat(data[i].P4),
+
+
+       });
+
+     }
+     dataPoints1=[];
+     dataPoints2=[];
+     dataPoints3=[];
+     dataPoints4=[];
+     info = {
+     zoomEnabled: true,
+     theme:"light2",
+     animationEnabled: true,
+     zoomEnabled: true,
+     exportEnabled: true,
+     title:{
+       text: "Potencia generada: Nodo 611"
+     },
+     axisY :{
+       includeZero: false,
+       title: "Potencia [W]",
+       suffix: "W"
+     },
+     toolTip: {
+       shared: true
+     },
+     legend:{
+       cursor:"pointer",
+       verticalAlign: "top",
+       fontSize: 22,
+       fontColor: "dimGrey",
+       itemclick : toggleDataSeries
+     },
+     data: [{
+       type: "spline",
+       showInLegend: true,
+       yValueFormatString: "##.00 W",
+       xValueFormatString: "hh:mm:ss TT",
+       showInLegend: true,
+       name: "Red",
+       dataPoints: dataPoints1
+       },
+       {
+       type: "spline",
+       showInLegend: true,
+       yValueFormatString: "##.00 W",
+       xValueFormatString: "hh:mm:ss TT",
+       showInLegend: true,
+       name: "Panel",
+       dataPoints: dataPoints2
+     },
+       {
+       type: "spline",
+       showInLegend: true,
+       yValueFormatString: "##.00 W",
+       xValueFormatString: "hh:mm:ss TT",
+       showInLegend: true,
+       name: "Bateria",
+       dataPoints: dataPoints3
+     },
+       {
+       type: "spline",
+       showInLegend: true,
+       yValueFormatString: "##.00 W",
+       xValueFormatString: "hh:mm:ss TT",
+       showInLegend: true,
+       name: "Carga",
+       dataPoints: dataPoints4
+     }]
+   }
+     console.log("Data points")
+     console.log(dataPoints1)
+     chart.render();
+     console.log(dataPoints1)
+   });
+
    }
 
 var chart = new CanvasJS.Chart("chartContainer", info);
@@ -407,10 +518,121 @@ var dataPoints3 = [];
 var dataPoints4 = [];
 var data = [];
 
-setInterval(drawChart, 9000);
- function drawChart()
+//setInterval(drawChart, 9000);
+drawChartWeek()
+ function drawChartWeek()
    {
-jQuery.getJSON("sample.json", addData);
+     console.log("Getting Data of the Week")
+     jQuery.getJSON("/GenerarWeek","Case1" ,function addData(data) {
+     console.log(data)
+     // dataPoints1=[]
+     for (var i = 0; i < data.length; i++) {
+       console.log("Iteracion"+i)
+       console.log("data["+i+"]")
+       console.log({
+         label: data[i].datetime,
+         y: parseFloat(data[i].P1),
+
+       })
+       console.log("datapoints1")
+       console.log(dataPoints1)
+       dataPoints1.push({
+         label: data[i].datetime,
+         y: parseFloat(data[i].P1),
+
+
+       });
+       dataPoints2.push({
+         label: data[i].datetime,
+         y: parseFloat(data[i].P2),
+
+
+       });
+       dataPoints3.push({
+         label: data[i].datetime,
+         y: parseFloat(data[i].P3),
+
+
+       });
+       dataPoints4.push({
+         label: data[i].datetime,
+         y: parseFloat(data[i].P4),
+
+
+       });
+
+     }
+     dataPoints1=[];
+     dataPoints2=[];
+     dataPoints3=[];
+     dataPoints4=[];
+     info = {
+     zoomEnabled: true,
+     theme:"light2",
+     animationEnabled: true,
+     zoomEnabled: true,
+     exportEnabled: true,
+     title:{
+       text: "Potencia generada: Nodo 611"
+     },
+     axisY :{
+       includeZero: false,
+       title: "Potencia [W]",
+       suffix: "W"
+     },
+     toolTip: {
+       shared: true
+     },
+     legend:{
+       cursor:"pointer",
+       verticalAlign: "top",
+       fontSize: 22,
+       fontColor: "dimGrey",
+       itemclick : toggleDataSeries
+     },
+     data: [{
+       type: "spline",
+       showInLegend: true,
+       yValueFormatString: "##.00 W",
+       xValueFormatString: "hh:mm:ss TT",
+       showInLegend: true,
+       name: "Red",
+       dataPoints: dataPoints1
+       },
+       {
+       type: "spline",
+       showInLegend: true,
+       yValueFormatString: "##.00 W",
+       xValueFormatString: "hh:mm:ss TT",
+       showInLegend: true,
+       name: "Panel",
+       dataPoints: dataPoints2
+     },
+       {
+       type: "spline",
+       showInLegend: true,
+       yValueFormatString: "##.00 W",
+       xValueFormatString: "hh:mm:ss TT",
+       showInLegend: true,
+       name: "Bateria",
+       dataPoints: dataPoints3
+     },
+       {
+       type: "spline",
+       showInLegend: true,
+       yValueFormatString: "##.00 W",
+       xValueFormatString: "hh:mm:ss TT",
+       showInLegend: true,
+       name: "Carga",
+       dataPoints: dataPoints4
+     }]
+     }
+     console.log("Data points")
+     console.log(dataPoints1)
+     chart.render();
+     console.log(dataPoints1)
+     });
+
    }
 
 var info = {
